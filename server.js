@@ -1,7 +1,7 @@
 // Dependencies
 var express = require("express");
 var path = require("path");
-var mysql = require("mysql")
+// var mysql = require("mysql");
 
 // Set up the Express App
 var app = express();
@@ -9,6 +9,8 @@ var PORT = 3000;
 
 // HTML routes ====================================
 //   * GET `/notes` - Should return the `notes.html` file.
+app.use(express.static("public"));
+
 app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "public/notes.html"));
 });
@@ -20,6 +22,7 @@ app.get("*", function (req, res) {
 // API routes =====================================
 
 //   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
+app.get("/api/notes")
 
 //   * POST `/api/notes` - Should recieve a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
 
