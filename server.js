@@ -26,16 +26,43 @@ app.post("/api/notes", function (req, res) {
     var newPost = req.body;
     // console.log(newPost)
     db.push(newPost);
-    console.log(db);
-    fs.writeFile("./db/db.json", db, function (err) {
+    // console.log(db);
+    let data = JSON.stringify(db, null, 2);
+    fs.writeFile("./db/db.json", data, function (err) {
         if (err) throw err;
         console.log('Saved!');
+        // console.log(data)
+
+        // add id and number to each note
+        // NOT WORKING
+        for (i = 0; i > data.length; i++) {
+            console.log(data)
+            var highestId = math.max(data[i])
+            console.log(highestId)
+            data.id = highestId + 1
+        }
     })
     res.redirect("/notes")
 })
 //   * DELETE `/api/notes/:id` - Should recieve a query paramter containing the id of a note to delete. This means you'll need to find a way to give each note a unique `id` when it's saved. In order to delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
-// app.delete("/api/notes/:id", function (req, res) {
-// })
+
+// CODE NOT WORKING
+app.delete("/api/notes/:id", function (req, res) {
+    // console.log(req.body.params);
+    var noteId = req.params
+    fs.readFile("./db/db.json", function (err, data) {
+        if (err) throw err;
+        for (i = 0; i > db.length; i++) {
+            console.log(db[i])
+
+        }
+    })
+})
+
+
+
+
+
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"));
 });
