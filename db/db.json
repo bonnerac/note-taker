@@ -1,1 +1,12 @@
-[object Object],[object Object],[object Object]
+[
+    {
+        "title": "Hi",
+        "text": "hi",
+        "id": "1"
+    },
+    {
+        "title": "Bye",
+        "text": "bye",
+        "id": "2"
+    }
+]
