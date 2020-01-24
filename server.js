@@ -19,17 +19,14 @@ app.get("/notes", function (req, res) {
 // API routes =====================================
 //   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
 app.get("/api/notes", function (req, res) {
-    fs.readFile("./db/db.json", "utf8", function (err, data) {
-        console.log(data)
-        res.json(data)
-    })
+    res.json(db)
 });
 //   * POST `/api/notes` - Should recieve a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
 app.post("/api/notes", function (req, res) {
     var newPost = req.body;
     // console.log(newPost)
     db.push(newPost);
-    // console.log(data)
+    console.log(db);
     fs.writeFile("./db/db.json", db, function (err) {
         if (err) throw err;
         console.log('Saved!');
